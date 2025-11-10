@@ -1,7 +1,8 @@
 const CACHE_NAME = 'zulal-baha-v1';
 const urlsToCache = [
-  '/',
-  '/index.html'
+  '/Zulal-Baha-Program/',
+  '/Zulal-Baha-Program/index.html',
+  '/Zulal-Baha-Program/manifest.json'
 ];
 
 // Install event - cache files
