@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>☕ Zülal & Baha Program 💪</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Push Pull Legs antrenman takip programı">
+    <meta name="theme-color" content="#ff6b9d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Antrenman">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23ff6b9d'/%3E%3Ctext x='50' y='65' font-size='50' text-anchor='middle' fill='white'%3E💪%3C/text%3E%3C/svg%3E">
+    
+    <style>
+        :root {
+            --bg-primary: linear-gradient(135deg, #ffeef8 0%, #e8f4ff 50%, #fff5f0 100%);
+            --bg-card: #ffffff;
+            --text-primary: #2c3e50;
+            --text-secondary: #7f8c8d;
+            --border-color: rgba(255, 192, 203, 0.1);
+            --shadow: 0 4px 20px rgba(255, 182, 193, 0.12);
+            --input-bg: #fff5f7;
+            --input-border: #ffe4ec;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            --bg-card: #1e1e2e;
+            --text-primary: #e8e8e8;
+            --text-secondary: #a0a0a0;
+            --border-color: rgba(100, 100, 120, 0.3);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            --input-bg: #2a2a3e;
+            --input-border: #3a3a4e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-primary);
+            min-height: 100vh;
+            padding: 20px;
+            transition: all 0.3s ease;
+            color: var(--text-primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c060ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--input-bg);
+            border: 2px solid var(--input-border);
+            border-radius: 25px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* User Toggle */
+        .user-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .user-btn {
+            padding: 15px 35px;
+            border: 2px solid var(--input-border);
+            border-radius: 25px;
+            background: var(--bg-card);
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            color: var(--text-primary);
+        }
+
+        .user-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .user-btn.active {
+            background: linear-gradient(135deg, #ff6b9d 0%, #ffa8c5 100%);
+            color: white;
+            border-color: #ff6b9d;
+        }
+
+        .user-btn.baha.active {
+            background: linear-gradient(135deg, #6ba3ff 0%, #a8c5ff 100%);
+            border-color: #6ba3ff;
+        }
+
+        /* Card Style */
+        .card {
+            background: var(--bg-card);
+            padding: 28px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
+        }
+
+        .card h2, .card h3 {
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 12px 25px;
+            background: var(--input-bg);
+            border: 2px solid var(--input-border);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .tab:hover {
+            transform: translateY(-2px);
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #ff6b9d 0%, #ffa8c5 100%);
+            color: white;
+            border-color: #ff6b9d;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-box {
+            background: var(--input-bg);
+            padding: 18px;
+            border-radius: 15px;
+            border: 2px solid var(--input-border);
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 182, 193, 0.2);
+        }
+
+        .stat-box label {
+            display: block;
+            color: var(--text-secondary);
+            font-size: 0.85em;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .stat-box input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--input-border);
+            border-radius: 10px;
+            font-size: 1.1em;
+            text-align: center;
+            color: var(--text-primary);
+            background: var(--bg-card);
+            transition: all 0.3s ease;
+        }
+
+        .stat-box input:focus {
+            outline: none;
+            border-color: #ffb3d9;
+            box-shadow: 0 0 0 3px rgba(255, 179, 217, 0.1);
+        }
+
+        /* Water & Sleep Tracking */
+        .tracking-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .water-tracker, .sleep-tracker {
+            background: var(--input-bg);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid var(--input-border);
+        }
+
+        .water-glasses {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .glass {
+            width: 40px;
+            height: 50px;
+            background: var(--bg-card);
+            border: 2px solid var(--input-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .glass:hover {
+            transform: scale(1.1);
+        }
+
+        .glass.filled {
+            background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+            border-color: #29b6f6;
+        }
+
+        .glass.filled::after {
+            content: '💧';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2em;
+        }
+
+        .sleep-input {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .sleep-input input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid var(--input-border);
+            border-radius: 10px;
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        /* Calendar */
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            background: var(--input-bg);
+            border: 2px solid var(--input-border);
+            border-radius: 12px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            min-height: 100px;
+        }
+
+        .calendar-day:hover {
+            transform: scale(1.05);
+        }
+
+        .calendar-day.drag-over {
+            background: rgba(255, 107, 157, 0.2);
+            border-color: #ff6b9d;
+        }
+
+        .day-name {
+            font-weight: 600;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .workout-tag {
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 0.75em;
+            margin: 3px 0;
+            cursor: move;
+            display: inline-block;
+            font-weight: 600;
+            color: white;
+        }
+
+        .tag-push { background: #e74c3c; }
+        .tag-pull { background: #3498db; }
+        .tag-legs { background: #2ecc71; }
+        .tag-cardio-bike { background: #f39c12; }
+        .tag-cardio-walk { background: #16a085; }
+        .tag-group { background: #9b59b6; }
+
+        .workout-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .workout-option {
+            padding: 8px 15px;
+            border-radius: 12px;
+            cursor: move;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .workout-option:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* Photo Gallery */
+        .photo-upload {
+            margin-top: 20px;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--input-border);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--input-bg);
+        }
+
+        .upload-area:hover {
+            border-color: #ff6b9d;
+            background: rgba(255, 107, 157, 0.05);
+        }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .photo-item {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-date {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px;
+            font-size: 0.75em;
+            text-align: center;
+        }
+
+        .delete-photo {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255,0,0,0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        /* Chart */
+        .chart-container {
+            height: 300px;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        /* Exercises */
+        .exercise-list {
+            list-style: none;
+        }
+
+        .exercise-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            background: var(--input-bg);
+            border-radius: 12px;
+            border: 1px solid var(--input-border);
+            transition: all 0.3s ease;
+        }
+
+        .exercise-item:hover {
+            transform: translateX(3px);
+        }
+
+        .exercise-name {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .exercise-sets {
+            padding: 5px 12px;
+            border-radius: 15px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        /* Buttons */
+        .btn {
+            background: linear-gradient(135deg, #ff6b9d 0%, #ffa8c5 100%);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 15px auto 0;
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
+        }
+
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--input-border);
+            border-radius: 12px;
+            font-size: 0.95em;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 100px;
+            background: var(--input-bg);
+            color: var(--text-primary);
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #ffb3d9;
+        }
+
+        @media (max-width: 768px) {
+            .calendar {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</div>
+            <h1>☕ Zülal & Baha Program 💪</h1>
+            <p style="color: var(--text-secondary);">🎵 Push • Pull • Legs 🎵</p>
+        </div>
+
+        <div class="user-toggle">
+            <button class="user-btn active" onclick="switchUser('zulal')">💕 Zülal</button>
+            <button class="user-btn baha" onclick="switchUser('baha')">💙 Baha</button>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('measurements')">📊 Ölçüler</div>
+            <div class="tab" onclick="switchTab('workouts')">💪 Antrenmanlar</div>
+            <div class="tab" onclick="switchTab('calendar')">📅 Takvim</div>
+            <div class="tab" onclick="switchTab('progress')">📈 İlerleme</div>
+            <div class="tab" onclick="switchTab('daily')">🌟 Günlük</div>
+        </div>
+
+        <!-- Measurements Tab -->
+        <div id="measurements" class="tab-content active">
+            <div class="card">
+                <h2>📊 <span id="user-name">Zülal'ın</span> Ölçüleri</h2>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <label>Kilo (kg)</label>
+                        <input type="number" id="weight" placeholder="0" step="0.1">
+                    </div>
+                    <div class="stat-box">
+                        <label>Boy (cm)</label>
+                        <input type="number" id="height" placeholder="0">
+                    </div>
+                    <div class="stat-box">
+                        <label>Bel (cm)</label>
+                        <input type="number" id="waist" placeholder="0">
+                    </div>
+                    <div class="stat-box">
+                        <label>Kalça (cm)</label>
+                        <input type="number" id="hips" placeholder="0">
+                    </div>
+                    <div class="stat-box">
+                        <label>Göğüs (cm)</label>
+                        <input type="number" id="chest" placeholder="0">
+                    </div>
+                    <div class="stat-box">
+                        <label>Kol (cm)</label>
+                        <input type="number" id="arm" placeholder="0">
+                    </div>
+                </div>
+                <button class="btn" onclick="saveStats()">💾 Kaydet</button>
+            </div>
+
+            <div class="card">
+                <h3>📝 <span id="notes-user">Zülal'ın</span> Notları</h3>
+                <textarea id="notes" placeholder="Antrenman notlarını buraya yazabilirsin..."></textarea>
+            </div>
+        </div>
+
+        <!-- Workouts Tab -->
+        <div id="workouts" class="tab-content">
+            <div class="card">
+                <h2>🔹 Isınma (Her Gün)</h2>
+                <ul style="list-style: none; padding-left: 15px;">
+                    <li style="margin-bottom: 10px;">☕ <strong>Kahve hazırla, müziğini aç</strong></li>
+                    <li style="margin-bottom: 10px;"><strong>1.</strong> 5 dakika yürüyüş (düz veya hafif incline)</li>
+                    <li style="margin-bottom: 10px;"><strong>2.</strong> Hafif dinamik hareketler:</li>
+                    <li style="margin-bottom: 10px; padding-left: 25px;">• Kol dairesi (ön–arka) ×10</li>
+                    <li style="margin-bottom: 10px; padding-left: 25px;">• Bodyweight Squat ×10</li>
+                    <li style="margin-bottom: 10px; padding-left: 25px;">• Band/hafif dumbbell Row ×10</li>
+                </ul>
+            </div>
+
+            <div class="card" style="border-left: 4px solid #e74c3c;">
+                <h2>🧡 GÜN 1 — PUSH</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;">Göğüs • Omuz • Triceps</p>
+                <ul class="exercise-list">
+                    <li class="exercise-item">
+                        <span class="exercise-name">💪 Chest Press (makine)</span>
+                        <span class="exercise-sets" style="background: #e74c3c;">3×12</span>
+                    </li>
+                    <li class="exercise-item">
+                        <span class="exercise-name">💪 Shoulder Press (makine)</span>
+                        <span class="exercise-sets" style="background: #e74c3c;">3×12</span>
+                    </li>
+                    <li class="exercise-item">
+                        <span class="exercise-name">💪 Lateral Raise (makine)</span>
+                        <span class="exercise-sets" style="background: #e74c3c;">3×12</span>
+                    </li>
+                    <li class="exercise-item">
+                        <span class="exercise-name">💪 Triceps Extension</span>
+                        <span class="exercise-sets" style="background: #e74c3c;">3×12</span>
+                    </li>
+                    <li class="exercise-item">
+                        <span class="exercise-name">🔥 Crunch</span>
+                        <span class="exercise-sets" style="background: #e74c3c;">4 set</span>
+                    </li>
+                </ul>
+                <div style="margin-top: 15px; padding: 15px; background: var(--input-bg); border-radius: 10px;">
+                    <h3 style="font-size: 1em; margin-bottom: 5px;">🏃‍♀️ Cardio</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.95em;">Yokuş yukarı yürüyüş: 5 incline, 4 hız</p>
+                </div>
+            </div>
+
+            <div class="card" style="border-left: 4px solid #3498db;">
+                <h2>💙 GÜN 2 — PULL</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;">Sırt • Arka Omuz • Biceps</p>
+                <ul class="exercise-list">
+                    <li class="exercise-item">
+                        <span class="exercise-name">💪 Lat Pulldown</span>
+                        <span class="exercise-sets" style="background: #3498db;">3×12</span>
+                    </li>
+                    <li class="exercise-item">
+                        <span class="exercise-name">💪 Seated Row (makine)</span>
+                        <span class="exercise-sets" style="background: #3498db;">3×12</span>
+                    </li>
+                    <li class="exercise-item">
+                        <span class="exercise-name">💪 Rear Delt Fly (makine)</span>
+                        <span class="exercise-sets" style="background: #3498db;">3×12</span>
+                    </li>
+                    <li class="exercise-item">
+                        <span class="exercise-name">💪 Biceps Curl</span>
+                        <span class="exercise-sets" style="background: #3498db;">3×12</span>
+                    </li>
+                    <li class="exercise-item">
+                        <span class="exercise-name">🔥 Crunch</span>
+                        <span class="exercise-sets" style="background: #3498db;">4 set</span>
+                    </li>
+                </ul>
+                <div style="margin-top: 15px; padding: 15px; background: var(--input-bg); border-radius: 10px;">
+                    <h3 style="font-size: 1em; margin-bottom: 5px;">🏃‍♀️ Cardio</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.95em;">Yokuş yukarı yürüyüş: 5 incline, 4 hız</p>
+                </div>
+            </div>
+
+            <div class="card" style="border-left: 4px solid #2ecc71;">
+                <h2>💚 GÜN 3 — LEGS</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;">Bacak • Kalça • Glutes</p>
+                <ul class="exercise-list">
+                    <li class="exercise-item">
+                        <span class="exercise-name">💪 Goblet Squat</span>
+                        <span class="exercise-sets" style="background: #2ecc71;">3×12</span>
+                    </li>
+                    <li class="exercise-item">
+                        <span class="exercise-name">💪 Dumbbell RDL</span>
+                        <span class="exercise-sets" style="background: #2ecc71;">3×12</span>
+                    </li>
+                    <li class="exercise-item">
+                        <span class="exercise-name">💪 Leg Extension</span>
+                        <span class="exercise-sets" style="background: #2ecc71;">3×12</span>
+                    </li>
+                    <li class="exercise-item">
+                        <span class="exercise-name">💪 Hip Abduction</span>
+                        <span class="exercise-sets" style="background: #2ecc71;">3×12</span>
+                    </li>
+                    <li class="exercise-item">
+                        <span class="exercise-name">💪 Hip Adduction</span>
+                        <span class="exercise-sets" style="background: #2ecc71;">3×12</span>
+                    </li>
+                    <li class="exercise-item">
+                        <span class="exercise-name">🔥 Crunch</span>
+                        <span class="exercise-sets" style="background: #2ecc71;">4 set</span>
+                    </li>
+                </ul>
+                <div style="margin-top: 15px; padding: 15px; background: var(--input-bg); border-radius: 10px;">
+                    <h3 style="font-size: 1em; margin-bottom: 5px;">🏃‍♀️ Cardio</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.95em;">Yokuş yukarı yürüyüş: 5 incline, 4 hız</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calendar Tab -->
+        <div id="calendar" class="tab-content">
+            <div class="card">
+                <h2>📅 Haftalık Program</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;">Antrenmanları günlere sürükle-bırak yapabilirsin</p>
+                
+                <div class="workout-options">
+                    <div class="workout-option tag-push" draggable="true" ondragstart="drag(event)" data-type="push">🧡 PUSH</div>
+                    <div class="workout-option tag-pull" draggable="true" ondragstart="drag(event)" data-type="pull">💙 PULL</div>
+                    <div class="workout-option tag-legs" draggable="true" ondragstart="drag(event)" data-type="legs">💚 LEGS</div>
+                    <div class="workout-option tag-cardio-bike" draggable="true" ondragstart="drag(event)" data-type="cardio-bike">🚴 Bisiklet</div>
+                    <div class="workout-option tag-cardio-walk" draggable="true" ondragstart="drag(event)" data-type="cardio-walk">🚶 Yürüyüş</div>
+                    <div class="workout-option tag-group" draggable="true" ondragstart="drag(event)" data-type="group">👥 Grup Dersi</div>
+                </div>
+
+                <div class="calendar">
+                    <div class="calendar-day" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="day-name">Pazartesi</div>
+                        <div class="day-workouts" data-day="monday"></div>
+                    </div>
+                    <div class="calendar-day" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="day-name">Salı</div>
+                        <div class="day-workouts" data-day="tuesday"></div>
+                    </div>
+                    <div class="calendar-day" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="day-name">Çarşamba</div>
+                        <div class="day-workouts" data-day="wednesday"></div>
+                    </div>
+                    <div class="calendar-day" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="day-name">Perşembe</div>
+                        <div class="day-workouts" data-day="thursday"></div>
+                    </div>
+                    <div class="calendar-day" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="day-name">Cuma</div>
+                        <div class="day-workouts" data-day="friday"></div>
+                    </div>
+                    <div class="calendar-day" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="day-name">Cumartesi</div>
+                        <div class="day-workouts" data-day="saturday"></div>
+                    </div>
+                    <div class="calendar-day" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="day-name">Pazar</div>
+                        <div class="day-workouts" data-day="sunday"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Tab -->
+        <div id="progress" class="tab-content">
+            <div class="card">
+                <h2>📈 İlerleme Grafikleri</h2>
+                <div class="chart-container">
+                    <canvas id="progressChart"></canvas>
+                </div>
+                <p style="text-align: center; color: var(--text-secondary); margin-top: 20px;">
+                    Ölçülerini düzenli kaydet, grafiğini görürsün! 📊
+                </p>
+            </div>
+
+            <div class="card">
+                <h2>📸 İlerleme Fotoğrafları</h2>
+                <div class="photo-upload">
+                    <div class="upload-area" onclick="document.getElementById('photoInput').click()">
+                        <p style="font-size: 3em;">📷</p>
+                        <p><strong>Fotoğraf Yükle</strong></p>
+                        <p style="color: var(--text-secondary); font-size: 0.9em;">İlerleme fotoğrafını buraya ekle</p>
+                    </div>
+                    <input type="file" id="photoInput" accept="image/*" style="display: none;" onchange="uploadPhoto(event)">
+                </div>
+                <div class="photo-gallery" id="photoGallery"></div>
+            </div>
+        </div>
+
+        <!-- Daily Tab -->
+        <div id="daily" class="tab-content">
+            <div class="card">
+                <h2>🌟 Günlük Takip</h2>
+                
+                <div class="tracking-row">
+                    <div class="water-tracker">
+                        <h3 style="margin-bottom: 10px;">💧 Su Tüketimi</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9em;">Hedef: 8 bardak</p>
+                        <div class="water-glasses" id="waterGlasses"></div>
+                    </div>
+
+                    <div class="sleep-tracker">
+                        <h3 style="margin-bottom: 10px;">😴 Uyku</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9em;">Hedef: 7-9 saat</p>
+                        <div class="sleep-input">
+                            <input type="number" id="sleepHours" placeholder="Saat" min="0" max="24" step="0.5">
+                            <button class="btn" style="margin: 0; padding: 12px 20px;" onclick="saveSleep()">💾</button>
+                        </div>
+                        <p id="sleepDisplay" style="margin-top: 10px; font-weight: 600; color: var(--text-primary);"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentUser = 'zulal';
+        let draggedType = null;
+
+        // Theme Toggle
+        function toggleDarkMode() {
+            const body = document.body;
+            const toggle = document.querySelector('.dark-mode-toggle');
+            
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                toggle.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                toggle.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load theme on startup
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+            document.querySelector('.dark-mode-toggle').textContent = '☀️';
+        }
+
+        // Tab Switching
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        // User Switching
+        function switchUser(user) {
+            saveCurrentData();
+            currentUser = user;
+            
+            document.querySelectorAll('.user-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const userName = user === 'zulal' ? "Zülal'ın" : "Baha'nın";
+            document.getElementById('user-name').textContent = userName;
+            document.getElementById('notes-user').textContent = userName;
+            
+            loadUserData(user);
+            loadWaterData();
+            loadSleepData();
+            loadPhotoGallery();
+        }
+
+        function saveCurrentData() {
+            const stats = {
+                weight: document.getElementById('weight').value,
+                height: document.getElementById('height').value,
+                waist: document.getElementById('waist').value,
+                hips: document.getElementById('hips').value,
+                chest: document.getElementById('chest').value,
+                arm: document.getElementById('arm').value,
+                date: new Date().toLocaleDateString('tr-TR')
+            };
+
+            localStorage.setItem(`workoutStats_${currentUser}`, JSON.stringify(stats));
+            localStorage.setItem(`workoutNotes_${currentUser}`, document.getElementById('notes').value);
+        }
+
+        function loadUserData(user) {
+            const saved = localStorage.getItem(`workoutStats_${user}`);
+            if (saved) {
+                const data = JSON.parse(saved);
+                document.getElementById('weight').value = data.weight || '';
+                document.getElementById('height').value = data.height || '';
+                document.getElementById('waist').value = data.waist || '';
+                document.getElementById('hips').value = data.hips || '';
+                document.getElementById('chest').value = data.chest || '';
+                document.getElementById('arm').value = data.arm || '';
+            } else {
+                ['weight', 'height', 'waist', 'hips', 'chest', 'arm'].forEach(id => {
+                    document.getElementById(id).value = '';
+                });
+            }
+
+            const notes = localStorage.getItem(`workoutNotes_${user}`);
+            document.getElementById('notes').value = notes || '';
+        }
+
+        function saveStats() {
+            saveCurrentData();
+            
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = '💕 Kaydedildi!';
+            button.style.background = 'linear-gradient(135deg, #a8e6cf 0%, #95e1d3 100%)';
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = 'linear-gradient(135deg, #ff6b9d 0%, #ffa8c5 100%)';
+            }, 2000);
+        }
+
+        // Auto-save notes
+        document.getElementById('notes').addEventListener('input', function() {
+            localStorage.setItem(`workoutNotes_${currentUser}`, this.value);
+        });
+
+        // Drag and Drop
+        function allowDrop(ev) {
+            ev.preventDefault();
+            ev.currentTarget.classList.add('drag-over');
+        }
+
+        function drag(ev) {
+            draggedType = ev.target.getAttribute('data-type');
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            ev.currentTarget.classList.remove('drag-over');
+            
+            const dayWorkouts = ev.currentTarget.querySelector('.day-workouts');
+            const day = dayWorkouts.getAttribute('data-day');
+            
+            const tagClass = `tag-${draggedType}`;
+            const emoji = {
+                'push': '🧡 PUSH',
+                'pull': '💙 PULL',
+                'legs': '💚 LEGS',
+                'cardio-bike': '🚴 Bisiklet',
+                'cardio-walk': '🚶 Yürüyüş',
+                'group': '👥 Grup'
+            }[draggedType];
+            
+            const tag = document.createElement('div');
+            tag.className = `workout-tag ${tagClass}`;
+            tag.textContent = emoji;
+            tag.onclick = function() { this.remove(); saveCalendar(); };
+            
+            dayWorkouts.appendChild(tag);
+            saveCalendar();
+        }
+
+        document.querySelectorAll('.calendar-day').forEach(day => {
+            day.addEventListener('dragleave', function() {
+                this.classList.remove('drag-over');
+            });
+        });
+
+        function saveCalendar() {
+            const calendar = {};
+            document.querySelectorAll('.day-workouts').forEach(day => {
+                const dayName = day.getAttribute('data-day');
+                const workouts = Array.from(day.children).map(tag => tag.textContent);
+                calendar[dayName] = workouts;
+            });
+            localStorage.setItem(`calendar_${currentUser}`, JSON.stringify(calendar));
+        }
+
+        function loadCalendar() {
+            const saved = localStorage.getItem(`calendar_${currentUser}`);
+            if (saved) {
+                const calendar = JSON.parse(saved);
+                Object.keys(calendar).forEach(day => {
+                    const dayWorkouts = document.querySelector(`[data-day="${day}"]`);
+                    dayWorkouts.innerHTML = '';
+                    calendar[day].forEach(workout => {
+                        const tag = document.createElement('div');
+                        const type = workout.includes('PUSH') ? 'push' :
+                                   workout.includes('PULL') ? 'pull' :
+                                   workout.includes('LEGS') ? 'legs' :
+                                   workout.includes('Bisiklet') ? 'cardio-bike' :
+                                   workout.includes('Yürüyüş') ? 'cardio-walk' : 'group';
+                        tag.className = `workout-tag tag-${type}`;
+                        tag.textContent = workout;
+                        tag.onclick = function() { this.remove(); saveCalendar(); };
+                        dayWorkouts.appendChild(tag);
+                    });
+                });
+            }
+        }
+
+        // Water Tracking
+        function initWaterGlasses() {
+            const container = document.getElementById('waterGlasses');
+            container.innerHTML = '';
+            for (let i = 0; i < 8; i++) {
+                const glass = document.createElement('div');
+                glass.className = 'glass';
+                glass.onclick = function() {
+                    this.classList.toggle('filled');
+                    saveWaterData();
+                };
+                container.appendChild(glass);
+            }
+        }
+
+        function saveWaterData() {
+            const filled = document.querySelectorAll('.glass.filled').length;
+            const today = new Date().toDateString();
+            localStorage.setItem(`water_${currentUser}_${today}`, filled);
+        }
+
+        function loadWaterData() {
+            initWaterGlasses();
+            const today = new Date().toDateString();
+            const saved = localStorage.getItem(`water_${currentUser}_${today}`);
+            if (saved) {
+                const glasses = document.querySelectorAll('.glass');
+                for (let i = 0; i < parseInt(saved); i++) {
+                    glasses[i].classList.add('filled');
+                }
+            }
+        }
+
+        // Sleep Tracking
+        function saveSleep() {
+            const hours = document.getElementById('sleepHours').value;
+            if (hours) {
+                const today = new Date().toDateString();
+                localStorage.setItem(`sleep_${currentUser}_${today}`, hours);
+                loadSleepData();
+            }
+        }
+
+        function loadSleepData() {
+            const today = new Date().toDateString();
+            const saved = localStorage.getItem(`sleep_${currentUser}_${today}`);
+            const display = document.getElementById('sleepDisplay');
+            if (saved) {
+                document.getElementById('sleepHours').value = saved;
+                display.textContent = `Bugün ${saved} saat uyudun 😴`;
+            } else {
+                display.textContent = '';
+            }
+        }
+
+        // Photo Upload
+        function uploadPhoto(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const photos = JSON.parse(localStorage.getItem(`photos_${currentUser}`) || '[]');
+                    photos.push({
+                        data: e.target.result,
+                        date: new Date().toLocaleDateString('tr-TR')
+                    });
+                    localStorage.setItem(`photos_${currentUser}`, JSON.stringify(photos));
+                    loadPhotoGallery();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function loadPhotoGallery() {
+            const gallery = document.getElementById('photoGallery');
+            const photos = JSON.parse(localStorage.getItem(`photos_${currentUser}`) || '[]');
+            
+            gallery.innerHTML = '';
+            photos.forEach((photo, index) => {
+                const item = document.createElement('div');
+                item.className = 'photo-item';
+                item.innerHTML = `
+                    <img src="${photo.data}" alt="Progress photo">
+                    <div class="photo-date">${photo.date}</div>
+                    <button class="delete-photo" onclick="deletePhoto(${index})">×</button>
+                `;
+                gallery.appendChild(item);
+            });
+        }
+
+        function deletePhoto(index) {
+            const photos = JSON.parse(localStorage.getItem(`photos_${currentUser}`) || '[]');
+            photos.splice(index, 1);
+            localStorage.setItem(`photos_${currentUser}`, JSON.stringify(photos));
+            loadPhotoGallery();
+        }
+
+        // Initialize on load
+        window.onload = function() {
+            loadUserData('zulal');
+            loadCalendar();
+            loadWaterData();
+            loadSleepData();
+            loadPhotoGallery();
+            
+            // Register Service Worker for PWA
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(reg => console.log('Service Worker registered'))
+                    .catch(err => console.log('Service Worker registration failed'));
+            }
+        };
+    </script>
+</body>
+</html>
